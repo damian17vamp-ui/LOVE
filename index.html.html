@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Timeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight: #0b132b;
+            --space-blue: #1c2541;
+            --gold: #e0a96d;
+            --starlight: #ffffff;
+            --soft-glow: rgba(224, 169, 109, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--midnight);
+            font-family: 'Montserrat', sans-serif;
+            color: #d1d5db;
+            overflow-x: hidden;
+            transition: background 1.5s ease;
+            touch-action: manipulation;
+        }
+
+        /* PANTALLA DE INICIO CONSTELACIÓN */
+        #gatekeeper {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, var(--space-blue) 0%, var(--midnight) 100%);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .star-orb {
+            font-size: 40px;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold);
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h2.gate-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+        }
+
+        .btn-universe {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 12px 35px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--soft-glow);
+            transition: all 0.4s ease;
+        }
+
+        .btn-universe:hover {
+            background: var(--gold);
+            color: var(--midnight);
+            box-shadow: 0 0 25px var(--gold);
+        }
+
+        /* CONTENIDO PRINCIPAL ELEGANTE */
+        .dashboard {
+            display: none;
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1.main-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #9ca3af;
+        }
+
+        /* TARJETAS DEL VIAJE DEL TIEMPO */
+        .timeline-card {
+            background: var(--space-blue);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(224, 169, 109, 0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .tag-time {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h3.card-title {
+            margin: 0 0 15px 0;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* NUEVO CAPÍTULO I: INTERACTIVO ROMÁNTICO */
+        .constellation-map {
+            background: rgba(11, 19, 43, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px dashed var(--gold);
+        }
+
+        .star-button {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--starlight);
+            cursor: pointer;
+            text-shadow: 0 0 10px var(--starlight);
+            transition: all 0.3s ease;
+            margin: 0 8px;
+        }
+
+        .star-button:hover {
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold);
+            transform: scale(1.2);
+        }
+
+        #constellation-msg {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            min-height: 40px;
+            color: #e5e7eb;
+            line-height: 1.4;
+        }
+
+        /* CAJA DE MEMORIAS CON PANTALLA IN-APP */
+        .memory-vault {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .vault-key {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #4b5563;
+            color: var(--starlight);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vault-key:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            background: var(--soft-glow);
+        }
+
+        #vault-display {
+            min-height: 60px;
+            background: rgba(11, 19, 43, 0.4);
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: center;
+            border-left: 3px solid var(--gold);
+        }
+
+        /* SELECTOR DE ORÁCULO / DESEOS */
+        .oracle-container {
+            text-align: center;
+        }
+
+        .btn-oracle {
+            background: var(--gold);
+            color: var(--midnight);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: transform 0.2s;
+        }
+
+        .btn-oracle:active {
+            transform: scale(0.95);
+        }
+
+        #oracle-output {
+            margin-top: 15px;
+            min-height: 40px;
+            font-weight: 300;
+            color: #e5e7eb;
+        }
+
+        /* ANIMACIÓN DE ESTRELLAS FUGACES */
+        .shooting-star {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1000;
+            background: linear-gradient(90deg, #fff, transparent);
+            height: 2px;
+            animation: shoot linear forwards;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0) rotate(-45deg) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-500px) translateY(500px) rotate(-45deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div id="gatekeeper">
+        <div class="star-orb">✦</div>
+        <h2 class="gate-title">Our personal cosmos</h2>
+        <p style="color: #9ca3af; margin-bottom: 30px; font-weight: 300;">An archive of the days we've shared</p>
+        <button class="btn-universe" onclick="unlockCosmos()">Initialize ✨</button>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="dashboard" id="main-space">
+        <header>
+            <h1 class="main-title">ANAMNESIS</h1>
+            <p class="subtitle">Celebrating our shared orbit around the sun</p>
+        </header>
+
+        <!-- CAPÍTULO 1: NUEVO ENFOQUE - EL CATALIZADOR (SIN CONTADOR) -->
+        <div class="timeline-card">
+            <span class="tag-time">Chapter I</span>
+            <h3 class="card-title">The Catalyst</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">Before our paths crossed, the sky was just a collection of random lights. Then, everything shifted.</p>
+            
+            <div class="constellation-map">
+                <p style="font-size: 0.75rem; color: var(--gold); letter-spacing: 1px; margin-top: 0;">TOUCH A STAR TO IGNITE A MEMORY</p>
+                <div>
+                    <button class="star-button" onclick="revealGenesis(1)">✦</button>
+                    <button class="star-button" onclick="revealGenesis(2)">✨</button>
+                    <button class="star-button" onclick="revealGenesis(3)">✵</button>
+                </div>
+                <div id="constellation-msg">The universe holds its breath...</div>
+            </div>
+        </div>
+
+        <!-- CAPÍTULO 2: EL PRESENTE -->
+        <div class="timeline-card">
+            <span class="tag-time">Chapter II</span>
+            <h3 class="card-title">The Echoes of My Heart</h3>
+            <p style="font-size: 0.9rem;">Interact with the keys below to unlock fragments of my gratitude toward you.</p>
+            
+            <div class="memory-vault">
+                <button class="vault-key" onclick="readVault(1)">👁️‍عون</button>
+                <button class="vault-key" onclick="readVault(2)">🗝️</button>
+                <button class="vault-key" onclick="readVault(3)">🪐</button>
+                <button class="vault-key" onclick="readVault(4)">✨</button>
+            </div>
+
+            <div id="vault-display">Select a key to manifest a thought...</div>
+        </div>
+
+        <!-- CAPÍTULO 3: EL FUTURO -->
+        <div class="timeline-card" style="background: linear-gradient(180deg, var(--space-blue) 0%, #151d33 100%);">
+            <span class="tag-time">Chapter III</span>
+            <h3 class="card-title">Manifesting the Tomorrow</h3>
+            <p style="font-size: 0.9rem;">Tap the cosmic oracle to reveal a promise or wish for our upcoming years together.</p>
+            
+            <div class="oracle-container">
+                <button class="btn-oracle" onclick="consultOracle()">Consult Oracle</button>
+                <p id="oracle-output">The future is unwritten...</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Infinite Love Archive</p>
+            <span style="font-size: 0.7rem; font-family: 'Montserrat'; color: #6b7280;">To the moon and all the way back.</span>
+        </footer>
+    </div>
+
+    <script>
+        function unlockCosmos() {
+            document.getElementById('gatekeeper').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('gatekeeper').style.display = 'none';
+                document.getElementById('main-space').style.display = 'block';
+                initStars();
+            }, 800);
+        }
+
+        // LÓGICA DE REVELACIÓN PARA EL NUEVO CAPÍTULO I
+        function revealGenesis(starId) {
+            const output = document.getElementById('constellation-msg');
+            triggerShootingStar();
+            
+            const genesisMissions = {
+                1: "The precise moment you entered my life, the background noise faded, and everything finally made perfect sense.",
+                2: "Out of billions of galaxies and infinite timelines, matching your frequency remains my absolute greatest miracle.",
+                3: "We didn't just meet by coincidence; our orbits were designed to collapse into each other from the very beginning."
+            };
+            
+            output.innerHTML = `<em>"${genesisMissions[starId]}"</em>`;
+        }
+
+        // COFRE DE RECUERDOS (PANTALLA IN-APP)
+        function readVault(keyId) {
+            const display = document.getElementById('vault-display');
+            triggerShootingStar();
+            
+            const thoughts = {
+                1: "I love the peace you inject into my chaotic days. You are my safe harbor. ⚓",
+                2: "Thank you for listening to my silence and understanding my unspoken fears. 🤍",
+                3: "Even if the universe expanded a million times over, my baseline would still point to you. 🌌",
+                4: "Your resilience makes me want to become the absolute best version of myself. 🏆"
+            };
+            
+            display.innerText = thoughts[keyId];
+        }
+
+        // GENERADOR ALEATORIO DEL FUTURO
+        function consultOracle() {
+            const output = document.getElementById('oracle-output');
+            triggerShootingStar();
+
+            const visions = [
+                "More unplanned road trips and middle-of-the-night laughs. 🚗✨",
+                "Building a cozy home where our only rule is to stay kind. 🏡",
+                "Conquering professional goals side by side, celebrating each other. 🎓",
+                "Growing old together but keeping the exact same teenage spark. 🥂",
+                "New countries to explore and new memories to freeze in time. 🗺️"
+            ];
+
+            const currentText = output.innerText;
+            let randomVision = currentText;
+            
+            while (randomVision === currentText) {
+                randomVision = visions[Math.floor(Math.random() * visions.length)];
+            }
+            
+            output.innerHTML = `<em>"${randomVision}"</em>`;
+        }
+
+        // EFECTO VISUAL: ESTRELLAS FUGACES
+        function spawnStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.top = Math.random() * 40 + 'vh';
+            star.style.right = Math.random() * 20 + 'vw';
+            star.style.width = (Math.random() * 80 + 40) + 'px';
+            star.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
+            
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 2500);
+        }
+
+        function triggerShootingStar() {
+            for(let i=0; i<2; i++) {
+                setTimeout(spawnStar, i * 300);
+            }
+        }
+
+        function initStars() {
+            setInterval(spawnStar, 4000);
+        }
+    </script>
+</body>
+
+</html>
